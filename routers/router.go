@@ -1,7 +1,11 @@
 package routers
 
 import (
+	_ "gin_demo/docs"
+
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 
 	"gin_demo/middleware/jwt"
 	"gin_demo/pkg/setting"
@@ -17,6 +21,8 @@ func InitRouter() *gin.Engine {
 	r.Use(gin.Recovery())
 
 	gin.SetMode(setting.RunMode)
+
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.GET("/test", func(c *gin.Context) {
 		c.JSON(200, gin.H{
