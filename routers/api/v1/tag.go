@@ -45,6 +45,7 @@ func GetTags(c *gin.Context) {
 // 新增文章标签
 func AddTag(c *gin.Context) {
 	name := c.Query("name")
+	// c.Query可用于获取?name=test&state=1这类URL参数, 而c.DefaultQuery则支持设置一个默认值
 	state := com.StrTo(c.DefaultQuery("state", "0")).MustInt()
 	createdBy := c.Query("created_by")
 
